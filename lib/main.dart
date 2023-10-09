@@ -4,7 +4,7 @@ import 'package:quiz_app/start_screen.dart';
 
 void main() {
   runApp(
-    Quiz(),
+    const Quiz(),
   );
 }
 
@@ -29,7 +29,6 @@ class _QuizState extends State<Quiz> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Container(
-          width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/bc.jpg'),
