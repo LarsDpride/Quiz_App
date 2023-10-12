@@ -23,7 +23,7 @@ class _QuestionState extends State<QuestionScreen> {
     final currentquestion = questionslist[currentquestionindex];
     return SizedBox(
       width: double.infinity,
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.all(90),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
