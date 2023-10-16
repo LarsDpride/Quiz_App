@@ -11,11 +11,14 @@ class StartScreen extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Opacity(
-            opacity: 0.8,
-            child: Image.asset(
-              'assets/quiz.png',
-              height: 150,
+          Container(
+            margin: const EdgeInsets.only(left: 50),
+            child: Opacity(
+              opacity: 0.8,
+              child: Image.asset(
+                'assets/quiz.png',
+                height: 150,
+              ),
             ),
           ),
           const SizedBox(
@@ -35,7 +38,10 @@ class StartScreen extends StatelessWidget {
               foregroundColor: Colors.white,
             ),
             icon: const Icon(Icons.arrow_circle_right_rounded),
-            label: const Text('start quiz'),
+            label: Text(
+              'start quiz',
+              style: GoogleFonts.lato(fontSize: 25),
+            ),
           )
         ],
       ),

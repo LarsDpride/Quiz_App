@@ -25,6 +25,14 @@ var questionslist = [
     'declare()',
     'return()',
   ]),
+  QuestionsClass(
+      'Which of the following command specifies where to find imported libraries.',
+      [
+        '-p',
+        '-c',
+        '-h',
+        'all of the above',
+      ]),
   QuestionsClass('--version command is used to', [
     'Displays VM version information',
     'Specifies the path',
