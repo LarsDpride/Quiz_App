@@ -53,7 +53,7 @@ class _QuizState extends State<Quiz> {
       showscreen = ResultScreen(selectedanswers, restart);
     }
     if (activescreen == 'start_screen') {
-      showscreen = showscreen = StartScreen(switchScreen);
+      showscreen = StartScreen(switchScreen);
     }
 
     return MaterialApp(

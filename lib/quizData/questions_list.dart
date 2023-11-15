@@ -1,4 +1,4 @@
-import 'package:quiz_app/quizData/questions_class.dart';
+import 'package:quiz_app/model/questions_class.dart';
 
 var questionslist = [
   QuestionsClass('Dart is an?', [
