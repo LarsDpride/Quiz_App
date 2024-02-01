@@ -9,9 +9,9 @@ class ShowSummery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 600,
-      child: SingleChildScrollView(
-        child: Column(
+      height: 550,
+      child: ListView(
+        children:[Column(
           children: summery
               .map(
                 (data) => Row(
@@ -28,7 +28,7 @@ class ShowSummery extends StatelessWidget {
                       child: Text(
                         ((data['Question_index'] as int) + 1).toString(),
                         style:
-                            GoogleFonts.lato(fontSize: 25, color: Colors.white),
+                            GoogleFonts.lato(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     const SizedBox(
@@ -68,6 +68,7 @@ class ShowSummery extends StatelessWidget {
               )
               .toList(),
         ),
+        ]
       ),
     );
   }

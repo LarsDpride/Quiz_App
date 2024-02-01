@@ -22,10 +22,8 @@ class _QuestionState extends State<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final currentquestion = questionslist[currentquestionindex];
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-        padding: const EdgeInsets.all(90),
+    return  Container(
+        padding: const EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -45,9 +43,10 @@ class _QuestionState extends State<QuestionScreen> {
                     changeIndex(answers);
                   }),
                 ),
+             
           ],
-        ),
-      ),
-    );
+        )
+      );
+
   }
 }

@@ -30,21 +30,27 @@ class ResultScreen extends StatelessWidget {
         .where((data) => data['Correct_Answers'] == data['selected_ANswer'])
         .length;
 
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-        padding: const EdgeInsets.all(90),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(
-            'You answered correctly $correctquestions out of $totalquestion',
-            style: GoogleFonts.lato(
-                fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
+    return ListView(
+      children: [
+       
+          Padding
+          (
+            padding: const EdgeInsets.fromLTRB(5, 60, 5, 5),
+            child: Text(
+              'Correct Answers = $correctquestions out of $totalquestion',
+              style: GoogleFonts.lato(
+                  fontSize: 28, color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
+
+          Container(
+        padding: const EdgeInsets.all(10),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ShowSummery(getSummery()),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
           TextButton.icon(
               onPressed: restart,
               style: TextButton.styleFrom(
@@ -58,6 +64,7 @@ class ResultScreen extends StatelessWidget {
               ))
         ]),
       ),
+      ],
     );
   }
 }
