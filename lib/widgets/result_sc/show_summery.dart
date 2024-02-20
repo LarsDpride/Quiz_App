@@ -45,17 +45,24 @@ class ShowSummery extends StatelessWidget {
                                 color:
                                     const Color.fromARGB(255, 255, 255, 255)),
                           ),
-                          Text(
-                            (data['Correct_Answers']).toString(),
-                            style: GoogleFonts.lato(
-                                fontSize: 25,
-                                color:
-                                    const Color.fromARGB(255, 232, 126, 219)),
+                          ListTile(
+                            leading: const Icon(Icons.check, color: Color.fromARGB(255, 232, 126, 219) ,),
+
+                            title: Text(
+                              (data['Correct_Answers']).toString(),
+                              style: GoogleFonts.lato(
+                                  fontSize: 25,
+                                  color:
+                                      const Color.fromARGB(255, 232, 126, 219)),
+                            ),
                           ),
-                          Text(
-                            (data['selected_ANswer']).toString(),
-                            style: GoogleFonts.lato(
-                                fontSize: 25, color: Colors.white),
+                          ListTile(
+                            leading:data['selected_ANswer'] == data['Correct_Answers'] ? const Icon(Icons.check, color: Colors.white,) : const Icon(Icons.close, color: Colors.white),
+                            title: Text(
+                              (data['selected_ANswer']).toString(),
+                              style: GoogleFonts.lato(
+                                  fontSize: 25, color: Colors.white),
+                            ),
                           ),
                           const SizedBox(
                             height: 20,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/quizData/questions_list.dart';
+import 'package:quiz_app/data/questions_list.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz_app/screens/result/components/show_summery.dart';
+import 'package:quiz_app/widgets/result_sc/show_summery.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen(this.selectedanswers, this.restart, {super.key});
