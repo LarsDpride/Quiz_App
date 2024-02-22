@@ -1,30 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quiz_app/providers/summery_provider.dart';
 import 'package:quiz_app/data/questions_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz_app/widgets/result_sc/show_summery.dart';
 
-class ResultScreen extends StatelessWidget {
-  const ResultScreen(this.selectedanswers, this.restart, {super.key});
-  final List<String> selectedanswers;
+class ResultScreen extends ConsumerWidget {
+  const ResultScreen( this.restart, {super.key});
   final void Function() restart;
-  List<Map<String, Object>> getSummery() {
-    List<Map<String, Object>> summery = [];
-
-    for (int i = 0; i < selectedanswers.length; i++) {
-      summery.add({
-        'Question_index': i,
-        'Question': questionslist[i].text,
-        'Correct_Answers': questionslist[i].answers[0],
-        'selected_ANswer': selectedanswers[i],
-      });
-    }
-
-    return summery;
-  }
 
   @override
-  Widget build(BuildContext context) {
-    final summeryData = getSummery();
+  Widget build(BuildContext context,WidgetRef ref) {
+
+    
+    final summeryData = ref.watch(summaryProvider);
     final totalquestion = questionslist.length;
     final correctquestions = summeryData
         .where((data) => data['Correct_Answers'] == data['selected_ANswer'])
@@ -49,7 +38,7 @@ class ResultScreen extends StatelessWidget {
           Container(
         padding: const EdgeInsets.all(10),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          ShowSummery(getSummery()),
+          ShowSummery(summeryData),
           const SizedBox(height: 10),
           TextButton.icon(
               onPressed: restart,
@@ -68,3 +57,4 @@ class ResultScreen extends StatelessWidget {
     );
   }
 }
+

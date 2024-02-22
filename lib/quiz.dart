@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quiz_app/providers/selectedanswers_provider.dart';
 import 'package:quiz_app/screens/question_screen.dart';
 import 'package:quiz_app/data/questions_list.dart';
 import 'package:quiz_app/screens/result_screen.dart';
 import 'package:quiz_app/screens/start_screen.dart';
 
-class Quiz extends StatefulWidget {
+class Quiz extends ConsumerStatefulWidget {
   const Quiz({super.key});
 
   @override
-  State<Quiz> createState() => _QuizState();
+  ConsumerState<Quiz> createState() => _QuizState();
 }
 
-class _QuizState extends State<Quiz> {
-  List<String> selectedanswers = [];
+class _QuizState extends ConsumerState<Quiz> {
 
   String activescreen = 'start_screen';
   void switchScreen() {
@@ -21,8 +22,8 @@ class _QuizState extends State<Quiz> {
     });
   }
 
-  void choosedAnswers(String answers) {
-    selectedanswers.add(answers);
+  void showResult() {
+   final  selectedanswers = ref.watch(selectedAnswersProvider);
     if (selectedanswers.length == questionslist.length) {
       setState(() {
         activescreen = 'result_screen';
@@ -33,7 +34,7 @@ class _QuizState extends State<Quiz> {
   void restart() {
     setState(() {
       activescreen = 'start_screen';
-      selectedanswers = [];
+      ref.watch(selectedAnswersProvider.notifier).restart();
     });
   }
 
@@ -41,10 +42,10 @@ class _QuizState extends State<Quiz> {
   Widget build(BuildContext context) {
     Widget showscreen = StartScreen(switchScreen);
     if (activescreen == 'question_screen') {
-      showscreen = QuestionScreen(choosedAnswers);
+      showscreen =  QuestionScreen(showResult);
     }
     if (activescreen == 'result_screen') {
-      showscreen = ResultScreen(selectedanswers, restart);
+      showscreen = ResultScreen(restart);
     }
     if (activescreen == 'start_screen') {
       showscreen = StartScreen(switchScreen);

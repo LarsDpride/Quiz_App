@@ -1,9 +1,8 @@
-+plugins {
-+    id "com.android.application"
-+    id "kotlin-android"
-+    id "dev.flutter.flutter-gradle-plugin"
-+}
-
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
 
 
 def localProperties = new Properties()
@@ -13,8 +12,6 @@ if (localPropertiesFile.exists()) {
         localProperties.load(reader)
     }
 }
-
-
 
 def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
 if (flutterVersionCode == null) {

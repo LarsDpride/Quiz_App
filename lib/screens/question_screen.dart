@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:quiz_app/providers/selectedanswers_provider.dart';
 import 'package:quiz_app/widgets/questions_sc/answer_buttons.dart';
 import 'package:quiz_app/data/questions_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class QuestionScreen extends StatefulWidget {
-  const QuestionScreen(this.choosedAnswers, {super.key});
-  final void Function(String answers) choosedAnswers;
+class QuestionScreen extends ConsumerStatefulWidget {
+  const QuestionScreen(this.showResult, {super.key});
+  final void Function() showResult;
   @override
-  State<QuestionScreen> createState() => _QuestionState();
+  ConsumerState<QuestionScreen> createState() => _QuestionState();
 }
 
-class _QuestionState extends State<QuestionScreen> {
+class _QuestionState extends ConsumerState<QuestionScreen> {
   var currentquestionindex = 0;
+
   void changeIndex(String answers) {
-    widget.choosedAnswers(answers);
+    ref.read(selectedAnswersProvider.notifier).choosedAnswers(answers);
+    widget.showResult();
     setState(() {
       currentquestionindex++;
     });
