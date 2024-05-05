@@ -14,7 +14,6 @@ class Quiz extends ConsumerStatefulWidget {
 }
 
 class _QuizState extends ConsumerState<Quiz> {
-
   String activescreen = 'start_screen';
   void switchScreen() {
     setState(() {
@@ -23,7 +22,7 @@ class _QuizState extends ConsumerState<Quiz> {
   }
 
   void showResult() {
-   final  selectedanswers = ref.watch(selectedAnswersProvider);
+    final selectedanswers = ref.watch(selectedAnswersProvider);
     if (selectedanswers.length == questionslist.length) {
       setState(() {
         activescreen = 'result_screen';
@@ -42,7 +41,7 @@ class _QuizState extends ConsumerState<Quiz> {
   Widget build(BuildContext context) {
     Widget showscreen = StartScreen(switchScreen);
     if (activescreen == 'question_screen') {
-      showscreen =  QuestionScreen(showResult);
+      showscreen = QuestionScreen(showResult);
     }
     if (activescreen == 'result_screen') {
       showscreen = ResultScreen(restart);
@@ -52,6 +51,9 @@ class _QuizState extends ConsumerState<Quiz> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home'),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
