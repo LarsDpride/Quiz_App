@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,9 +28,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,47 +49,20 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD2NMUDJysNDCh8PyQHYeQBth9pyRm6AsI',
-    appId: '1:586618493457:web:d729722464aa8d6a0c6fb0',
-    messagingSenderId: '586618493457',
-    projectId: 'quizapp-3bf94',
-    authDomain: 'quizapp-3bf94.firebaseapp.com',
-    storageBucket: 'quizapp-3bf94.appspot.com',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBPdRRc_MO5eM7k21h88CMRQL0Rbk_T2Ng',
-    appId: '1:586618493457:android:439ba786f619535a0c6fb0',
-    messagingSenderId: '586618493457',
-    projectId: 'quizapp-3bf94',
-    storageBucket: 'quizapp-3bf94.appspot.com',
+    apiKey: 'AIzaSyAKWUNBGzdfjdtbPKrUOYRkI781CeQ-7nc',
+    appId: '1:411703663239:android:b3033ad696a9abdb5ff622',
+    messagingSenderId: '411703663239',
+    projectId: 'quizapp-d8955',
+    storageBucket: 'quizapp-d8955.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDRLiyWcPrCxiuk5E9K1LtM2hXDkjTe0Qo',
-    appId: '1:586618493457:ios:7187421d06791b7d0c6fb0',
-    messagingSenderId: '586618493457',
-    projectId: 'quizapp-3bf94',
-    storageBucket: 'quizapp-3bf94.appspot.com',
+    apiKey: 'AIzaSyDHTYKlid2reNG2dRuFpmNxIeHIqFtzCd8',
+    appId: '1:411703663239:ios:f459a5570309eedf5ff622',
+    messagingSenderId: '411703663239',
+    projectId: 'quizapp-d8955',
+    storageBucket: 'quizapp-d8955.appspot.com',
     iosBundleId: 'com.example.quizApp',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDRLiyWcPrCxiuk5E9K1LtM2hXDkjTe0Qo',
-    appId: '1:586618493457:ios:7187421d06791b7d0c6fb0',
-    messagingSenderId: '586618493457',
-    projectId: 'quizapp-3bf94',
-    storageBucket: 'quizapp-3bf94.appspot.com',
-    iosBundleId: 'com.example.quizApp',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyD2NMUDJysNDCh8PyQHYeQBth9pyRm6AsI',
-    appId: '1:586618493457:web:e68f4e5207888f060c6fb0',
-    messagingSenderId: '586618493457',
-    projectId: 'quizapp-3bf94',
-    authDomain: 'quizapp-3bf94.firebaseapp.com',
-    storageBucket: 'quizapp-3bf94.appspot.com',
   );
 }
