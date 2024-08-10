@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/auth/login.dart';
@@ -13,7 +12,6 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _formkey = GlobalKey<FormState>();
-  String _userName = '';
   String _email = '';
   String _password = '';
 
@@ -83,14 +81,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   key: _formkey,
                   child: Column(
                     children: <Widget>[
-                      TextFormField(
-                        decoration: _inputDecoration(
-                            context, 'Username', const Icon(Icons.person)),
-                        validator: (value) =>
-                            value!.isEmpty ? 'Username must be entered' : null,
-                        onSaved: (newValue) => _userName = newValue ?? '',
-                      ),
-                      const SizedBox(height: 20),
                       TextFormField(
                         decoration: _inputDecoration(
                             context, 'Email', const Icon(Icons.email)),

@@ -56,11 +56,17 @@ class _QuizState extends ConsumerState<Quiz> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/bc.jpg'),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.red,
+              Colors.pink,
+              Colors.yellow,
+            ],
           ),
         ),
-        child: showscreen,
+        child: showscreen, // Your content here
       ),
     );
   }

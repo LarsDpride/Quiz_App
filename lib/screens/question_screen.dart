@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:quiz_app/providers/selectedanswers_provider.dart';
-import 'package:quiz_app/widgets/questions_sc/answer_buttons.dart';
+import 'package:quiz_app/components/answer_buttons.dart';
 import 'package:quiz_app/data/questions_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -26,7 +26,7 @@ class _QuestionState extends ConsumerState<QuestionScreen> {
   @override
   Widget build(BuildContext context) {
     final currentquestion = questionslist[currentquestionindex];
-    return  Container(
+    return Container(
         padding: const EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -47,10 +47,7 @@ class _QuestionState extends ConsumerState<QuestionScreen> {
                     changeIndex(answers);
                   }),
                 ),
-             
           ],
-        )
-      );
-
+        ));
   }
 }
