@@ -32,21 +32,24 @@ class ResultScreen extends ConsumerWidget {
         ),
         Container(
           padding: const EdgeInsets.all(10),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            ShowSummery(summeryData),
-            const SizedBox(height: 10),
-            TextButton.icon(
-                onPressed: restart,
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.all(15),
-                  foregroundColor: Colors.white,
-                ),
-                icon: const Icon(Icons.refresh),
-                label: Text(
-                  'Requiz',
-                  style: GoogleFonts.lato(fontSize: 30),
-                ))
-          ]),
+          child: Expanded(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              ShowSummery(summeryData),
+              const SizedBox(height: 10),
+              TextButton.icon(
+                  onPressed: restart,
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(15),
+                    foregroundColor: Colors.white,
+                  ),
+                  icon: const Icon(Icons.refresh),
+                  label: Text(
+                    'Requiz',
+                    style: GoogleFonts.lato(fontSize: 30),
+                  ))
+            ]),
+          ),
         ),
       ],
     );

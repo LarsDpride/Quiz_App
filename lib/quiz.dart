@@ -66,7 +66,7 @@ class _QuizState extends ConsumerState<Quiz> {
             ],
           ),
         ),
-        child: showscreen, // Your content here
+        child: showscreen,
       ),
     );
   }
