@@ -51,21 +51,7 @@ class _QuizState extends ConsumerState<Quiz> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.red,
-              Colors.pink,
-              Colors.yellow,
-            ],
-          ),
-        ),
         child: showscreen,
       ),
     );
