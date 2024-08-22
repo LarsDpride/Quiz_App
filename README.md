@@ -57,12 +57,12 @@ Result Screen
 1. Clone the repository:
 
 ```bash
-  git clone https://github.com/ShnAhmad/Flutter-Quiz-App.git
+  git clone https://github.com/ShnAhmad/Quiz_App
 ```
 2. Navigate to the project directory:
 
 ```bash
-  cd Flutter-Quiz-App
+  cd Quiz_App
 ``` 
 3. Install dependencies:
 
