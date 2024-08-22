@@ -1,7 +1,7 @@
 
 # Quiz App - Flutter Quiz Application
 
-Welcome to Quiz App, a simple and interactive quiz application built with Flutter. This app allows users to test their knowledge by answering a series of multiple-choice questions, submit the quiz, and review their performance by seeing the correct answers alongside their selected answers. Users can also log in with Firebase to track their progress and personalize their experience
+Welcome to Quiz App, a simple and interactive quiz application built with Flutter. This app allows users to test their knowledge by answering a series of multiple-choice questions, submit the quiz, and review their performance by seeing the correct answers alongside their selected answers.The app also features Firebase integration, allowing users to securely log in.
 
 ## Features
 
@@ -16,7 +16,42 @@ Welcome to Quiz App, a simple and interactive quiz application built with Flutte
 - User-Friendly Interface: Enjoy a clean, intuitive design that works smoothly on both Android and iOS devices.
 
 
+## Screenshots
+Login Screen
 
+![1](https://github.com/user-attachments/assets/1051149e-a390-4511-8ebd-c30f543337f0)
+
+SignUp Screen
+
+![2](https://github.com/user-attachments/assets/a241ed5d-8088-4e83-8424-46a5734230d1)
+
+Home Screen
+
+![3](https://github.com/user-attachments/assets/d8982059-e48c-45c7-93df-23428c485aa3)
+
+Questions Screen
+
+
+![4](https://github.com/user-attachments/assets/95d7354d-23b0-44fa-b54a-08305080ef65)
+
+Result Screen
+
+![5](https://github.com/user-attachments/assets/30465b0f-e5bb-47b7-b95e-98976a47b5e3)
+
+
+## Tech Stack
+
+
+**Client:** Flutter, dart
+
+**Backend Services:** Firebase (Authentication,)
+
+
+## Usage
+1. Log in: Use your Firebase credentials to log in to the app.
+2. Answer Questions: The app will present a series of multiple-choice questions. Tap on the option you think is correct.
+3. Submit Quiz: Once you've answered all the questions, submit the quiz.
+4. View Results: After submission, you'll be able to see a summary of your performance, including the correct answers and the ones you selected
 ## Installation
 
 1. Clone the repository:
@@ -39,13 +74,7 @@ flutter pub get
 ```bash
 flutter run
 ``` 
-## Usage
-1. Log in: Use your Firebase credentials to log in to the app.
-2. Answer Questions: The app will present a series of multiple-choice questions. Tap on the option you think is correct.
-3. Submit Quiz: Once you've answered all the questions, submit the quiz.
-4. View Results: After submission, you'll be able to see a summary of your performance, including the correct answers and the ones you selected
 ## Contributing
-
 We welcome contributions to improve Quiz App! Here's how you can contribute:
 
 1. Fork the repository.
@@ -76,5 +105,4 @@ git push origin feature/your-feature-name
 ## Support
 
 If you have any questions, eel free to reach out to me at shanahmad.dev@gmail.com.
-
 
