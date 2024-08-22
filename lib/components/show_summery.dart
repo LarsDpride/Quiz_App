@@ -10,8 +10,8 @@ class ShowSummery extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 550,
-      child: ListView(
-        children:[Column(
+      child: ListView(children: [
+        Column(
           children: summery
               .map(
                 (data) => Row(
@@ -46,8 +46,10 @@ class ShowSummery extends StatelessWidget {
                                     const Color.fromARGB(255, 255, 255, 255)),
                           ),
                           ListTile(
-                            leading: const Icon(Icons.check, color: Color.fromARGB(255, 232, 126, 219) ,),
-
+                            leading: const Icon(
+                              Icons.check,
+                              color: Color.fromARGB(255, 232, 126, 219),
+                            ),
                             title: Text(
                               (data['Correct_Answers']).toString(),
                               style: GoogleFonts.lato(
@@ -57,7 +59,13 @@ class ShowSummery extends StatelessWidget {
                             ),
                           ),
                           ListTile(
-                            leading:data['selected_ANswer'] == data['Correct_Answers'] ? const Icon(Icons.check, color: Colors.white,) : const Icon(Icons.close, color: Colors.white),
+                            leading: data['selected_ANswer'] ==
+                                    data['Correct_Answers']
+                                ? const Icon(
+                                    Icons.check,
+                                    color: Colors.white,
+                                  )
+                                : const Icon(Icons.close, color: Colors.white),
                             title: Text(
                               (data['selected_ANswer']).toString(),
                               style: GoogleFonts.lato(
@@ -75,8 +83,7 @@ class ShowSummery extends StatelessWidget {
               )
               .toList(),
         ),
-        ]
-      ),
+      ]),
     );
   }
 }

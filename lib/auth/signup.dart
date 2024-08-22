@@ -1,7 +1,7 @@
-// ignore_for_file: avoid_print
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/auth/login.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -16,167 +16,58 @@ class _SignupScreenState extends State<SignupScreen> {
   String _password = '';
 
   void signUp() async {
-    // print(_email);
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
-      // print('hello');
-      UserCredential? userCredential;
       try {
-        userCredential = await FirebaseAuth.instance
+        UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: _email, password: _password);
         User? user = userCredential.user;
         if (user != null) {
           Navigator.pushReplacement(
-            // ignore: use_build_context_synchronously
             context,
-            MaterialPageRoute(builder: (builder) => const LoginScreen()),
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
           );
         }
       } on FirebaseAuthException catch (e) {
-        print('Error signing up: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Failed to sign up. Please try again.'),
+          SnackBar(
+            content: Text('Failed to sign up: ${e.message}'),
+            backgroundColor: Colors.red,
           ),
         );
       }
     }
-    return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: SingleChildScrollView(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            height: MediaQuery.of(context).size.height - 50,
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Column(
-                  children: [
-                    const SizedBox(height: 60.0),
-                    const Text(
-                      "Sign up",
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "Create your account",
-                      style: TextStyle(fontSize: 15, color: Colors.grey[700]),
-                    )
-                  ],
-                ),
-                Form(
-                  key: _formkey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        decoration: _inputDecoration(
-                            context, 'Email', const Icon(Icons.email)),
-                        validator: (value) =>
-                            value!.isEmpty ? 'Email must be entered' : null,
-                        onSaved: (newValue) => _email = newValue ?? '',
-                      ),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                        decoration: _inputDecoration(
-                            context, 'Password', const Icon(Icons.password)),
-                        obscureText: true,
-                        validator: (value) =>
-                            value!.isEmpty ? 'Password must be entered' : null,
-                        onSaved: (newValue) => _password = newValue ?? '',
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                    padding: const EdgeInsets.only(top: 3, left: 3),
-                    child: ElevatedButton(
-                      onPressed: signUp,
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 13),
-                        backgroundColor: Colors.purple,
-                      ),
-                      child: const Text(
-                        "Sign up",
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      ),
-                    )),
-                const Center(child: Text("Or")),
-                Container(
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(25),
-                    border: Border.all(
-                      color: Colors.purple,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.white.withOpacity(0.5),
-                        spreadRadius: 1,
-                        blurRadius: 1,
-                        offset:
-                            const Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 30.0,
-                          width: 30.0,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage('assets/google.png'),
-                                fit: BoxFit.cover),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        const SizedBox(width: 18),
-                        const Text(
-                          "Sign In with Google",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.purple,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Row(
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade800, Colors.purple.shade800],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text("Already have an account?"),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (builder) => const LoginScreen()),
-                          );
-                        },
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(color: Colors.purple),
-                        ))
+                  children: [
+                    _header(),
+                    const SizedBox(height: 48),
+                    _form(),
+                    const SizedBox(height: 24),
+                    _googleSignInButton(),
+                    const SizedBox(height: 24),
+                    _loginLink(),
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           ),
         ),
@@ -184,14 +75,146 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  _inputDecoration(context, hinttext, icon) {
+  Widget _header() {
+    return Column(
+      children: [
+        Text(
+          "Sign Up",
+          style: GoogleFonts.poppins(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          "Create your account",
+          style: GoogleFonts.poppins(
+            fontSize: 16,
+            color: Colors.white70,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _form() {
+    return Form(
+      key: _formkey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextFormField(
+            decoration: _inputDecoration('Email', Icons.email),
+            style: GoogleFonts.poppins(color: Colors.white),
+            validator: (value) =>
+                value!.isEmpty ? 'Email must be entered' : null,
+            onSaved: (newValue) => _email = newValue ?? '',
+          ),
+          const SizedBox(height: 16),
+          TextFormField(
+            decoration: _inputDecoration('Password', Icons.lock),
+            style: GoogleFonts.poppins(color: Colors.white),
+            obscureText: true,
+            validator: (value) =>
+                value!.isEmpty ? 'Password must be entered' : null,
+            onSaved: (newValue) => _password = newValue ?? '',
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton(
+            onPressed: signUp,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.purple.shade800,
+              backgroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+            child: Text(
+              "Sign Up",
+              style: GoogleFonts.poppins(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _googleSignInButton() {
+    return Column(
+      children: [
+        Text(
+          "Or",
+          style: GoogleFonts.poppins(color: Colors.white70),
+        ),
+        const SizedBox(height: 16),
+        ElevatedButton.icon(
+          onPressed: () {
+            // Implement Google Sign In
+          },
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.black,
+            backgroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+          icon: Image.asset('assets/google.png', height: 24),
+          label: Text(
+            "Sign In with Google",
+            style: GoogleFonts.poppins(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _loginLink() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          "Already have an account? ",
+          style: GoogleFonts.poppins(color: Colors.white70),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()),
+            );
+          },
+          child: Text(
+            "Login",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  InputDecoration _inputDecoration(String hint, IconData icon) {
     return InputDecoration(
-        hintText: hinttext,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: BorderSide.none),
-        fillColor: Colors.purple.withOpacity(0.1),
-        filled: true,
-        prefixIcon: icon);
+      hintText: hint,
+      hintStyle: GoogleFonts.poppins(color: Colors.white60),
+      filled: true,
+      fillColor: Colors.white.withOpacity(0.1),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(30),
+        borderSide: BorderSide.none,
+      ),
+      prefixIcon: Icon(icon, color: Colors.white70),
+    );
   }
 }

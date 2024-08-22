@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/auth/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quiz_app/quiz.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,136 +19,188 @@ class _LoginScreenState extends State<LoginScreen> {
   void login() async {
     if (_formkey.currentState!.validate()) {
       _formkey.currentState!.save();
-      // print('hello');
-      UserCredential? userCredential;
       try {
-        userCredential = await FirebaseAuth.instance
+        UserCredential userCredential = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
         User? user = userCredential.user;
         if (user != null) {
-          Navigator.push(
-            // ignore: use_build_context_synchronously
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (builder) => Quiz()),
+            MaterialPageRoute(builder: (context) => Quiz()),
           );
         }
       } on FirebaseAuthException catch (e) {
-        print('Error signing in: $e');
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Failed to sign up. Please try again.'),
+          SnackBar(
+            content: Text('Login failed: ${e.message}'),
+            backgroundColor: Colors.red,
           ),
         );
       }
     }
-    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        margin: const EdgeInsets.all(24),
-        child: Form(
-          key: _formkey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              _header(context),
-              _inputField(context),
-              _forgotPassword(context),
-              _signup(context),
-            ],
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade800, Colors.purple.shade800],
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _header(),
+                      const SizedBox(height: 48),
+                      _inputField(),
+                      const SizedBox(height: 24),
+                      _forgotPassword(),
+                      const SizedBox(height: 24),
+                      _signup(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
-  _header(context) {
-    return const Column(
+  Widget _header() {
+    return Column(
       children: [
         Text(
           "Welcome Back",
-          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
-        Text("Enter your credential to login"),
+        const SizedBox(height: 8),
+        Text(
+          "Enter your credentials to login",
+          style: GoogleFonts.poppins(
+            fontSize: 16,
+            color: Colors.white70,
+          ),
+        ),
       ],
     );
   }
 
-  _inputField(context) {
+  Widget _inputField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextFormField(
           decoration: InputDecoration(
-              hintText: "Email",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none),
-              fillColor: Colors.purple.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.mail)),
+            hintText: "Email",
+            hintStyle: GoogleFonts.poppins(color: Colors.white60),
+            filled: true,
+            fillColor: Colors.white.withOpacity(0.1),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none,
+            ),
+            prefixIcon: const Icon(Icons.email, color: Colors.white70),
+          ),
+          style: GoogleFonts.poppins(color: Colors.white),
+          validator: (value) =>
+              value!.isEmpty ? 'Please enter your email' : null,
           onSaved: (newValue) => _email = newValue ?? '',
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         TextFormField(
           decoration: InputDecoration(
             hintText: "Password",
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none),
-            fillColor: Colors.purple.withOpacity(0.1),
+            hintStyle: GoogleFonts.poppins(color: Colors.white60),
             filled: true,
-            prefixIcon: const Icon(Icons.password),
+            fillColor: Colors.white.withOpacity(0.1),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
+              borderSide: BorderSide.none,
+            ),
+            prefixIcon: const Icon(Icons.lock, color: Colors.white70),
           ),
+          style: GoogleFonts.poppins(color: Colors.white),
           obscureText: true,
+          validator: (value) =>
+              value!.isEmpty ? 'Please enter your password' : null,
           onSaved: (newValue) => _password = newValue ?? '',
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 24),
         ElevatedButton(
           onPressed: login,
           style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
+            foregroundColor: Colors.purple.shade800,
+            backgroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: Colors.purple,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
           ),
-          child: const Text(
+          child: Text(
             "Login",
-            style: TextStyle(fontSize: 20, color: Colors.white),
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         )
       ],
     );
   }
 
-  _forgotPassword(context) {
+  Widget _forgotPassword() {
     return TextButton(
       onPressed: () {},
-      child: const Text(
+      child: Text(
         "Forgot password?",
-        style: TextStyle(color: Colors.purple),
+        style: GoogleFonts.poppins(
+          color: Colors.white,
+          fontSize: 16,
+        ),
       ),
     );
   }
 
-  _signup(context) {
+  Widget _signup() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Dont have an account? "),
+        Text(
+          "Don't have an account? ",
+          style: GoogleFonts.poppins(color: Colors.white70),
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (builder) => const SignupScreen()),
-              );
-            },
-            child: const Text(
-              "Sign Up",
-              style: TextStyle(color: Colors.purple),
-            ))
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SignupScreen()),
+            );
+          },
+          child: Text(
+            "Sign Up",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
       ],
     );
   }
